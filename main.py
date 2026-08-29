@@ -40,7 +40,7 @@ def get_location(place):
     else:
         return product_locations[place]
 
-route = ["I","A","C","E","I"]
+route = ["I","A","E","C","I"]
 
 for place in route:
     print(place,get_location(place))
