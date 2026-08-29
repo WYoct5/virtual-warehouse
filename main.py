@@ -45,8 +45,22 @@ route = ["I","A","C","E","I"]
 for place in route:
     print(place,get_location(place))
 
+total_distance = 0
+
 for i in range(len(route) - 1):
-    print(route[i], "→", route[i + 1])
+    current = get_location(route[i])
+    next_location = get_location(route[i + 1])
+
+    distance_between = distance(current,next_location)
+
+    print(route[i], "→", route[i + 1],":",distance_between)
+
+    total_distance = total_distance + distance_between
+
+print("合計距離:",total_distance)
+    
+
+
 
 for row in warehouse:
     print("".join(row))
