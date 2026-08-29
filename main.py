@@ -1,3 +1,5 @@
+from itertools import permutations
+
 warehouse = [
     [".",".",".",".","."],
     [".",".",".",".","."],
@@ -25,10 +27,6 @@ entrance = (4,4)
 
 picking_list = ["A","C","E"]
 
-for product in picking_list:
-    location = product_locations[product]
-    print(product,location)
-
 def distance(point1,point2):
     row_distance = abs(point1[0] - point2[0])
     col_distance = abs(point1[1] - point2[1])
@@ -40,27 +38,30 @@ def get_location(place):
     else:
         return product_locations[place]
 
-route = ["I","A","E","C","I"]
+shortest_distance = None
+shortest_route = None
 
-for place in route:
-    print(place,get_location(place))
+for order in permutations(picking_list):
+    route = ["I"] + list(order) + ["I"]
 
-total_distance = 0
+    total_distance = 0
 
-for i in range(len(route) - 1):
-    current = get_location(route[i])
-    next_location = get_location(route[i + 1])
+    for i in range(len(route) - 1):
+        current = get_location(route[i])
+        next_location = get_location(route[i + 1])
 
-    distance_between = distance(current,next_location)
+        distance_between = distance(current,next_location)
 
-    print(route[i], "→", route[i + 1],":",distance_between)
-
-    total_distance = total_distance + distance_between
-
-print("合計距離:",total_distance)
-    
+        total_distance = total_distance + distance_between
 
 
+    if shortest_distance == None:
+        shortest_distance = total_distance
+        shortest_route = route
 
-for row in warehouse:
-    print("".join(row))
+    elif total_distance < shortest_distance:
+        shortest_distance = total_distance
+        shortest_route = route
+
+print("最短距離:",shortest_distance)
+print("最短ルート:",shortest_route)
