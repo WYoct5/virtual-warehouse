@@ -55,6 +55,7 @@ for order in permutations(picking_list):
         total_distance = total_distance + distance_between
 
 
+
     if shortest_distance == None:
         shortest_distance = total_distance
         shortest_route = route
@@ -63,5 +64,40 @@ for order in permutations(picking_list):
         shortest_distance = total_distance
         shortest_route = route
 
+display_route = []
+
+for place in shortest_route:
+    if place == "I":
+        display_route.append("入口")
+    else:
+        display_route.append(place)
+
+print("→".join(display_route))
+
+
 print("最短距離:",shortest_distance)
 print("最短ルート:",shortest_route)
+
+
+
+display_warehouse = [row[:] for row in warehouse]
+
+location = get_location("C")
+print(location)
+
+row,col = location
+
+display_warehouse[row][col] = "2"
+
+for number,place in enumerate(shortest_route):
+    location = get_location(place)
+    row,col = location
+
+    if place != "I":
+        display_warehouse[row][col] = str(number + 1)
+
+
+
+for row in display_warehouse:
+    print("".join(row))
+

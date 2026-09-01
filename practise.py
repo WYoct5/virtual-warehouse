@@ -53,3 +53,25 @@ for order in permutations(products):
 
 print("最短距離:",shortest_distance)
 print("最短ルート:",shortest_route)
+
+route = ["I","C","A","E","I"]
+
+display_route = []
+
+for place in route:
+    if place == "I":
+        display_route.append("入口")
+    else:
+        display_route.append(place)
+
+print("→".join(display_route))
+
+
+print("→".join(route))
+
+
+for number,place in enumerate(route):
+    location = get_location(place)
+    print(number + 1,place,location)
+
+
